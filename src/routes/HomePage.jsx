@@ -20,24 +20,22 @@ function HomePage() {
     setLoading(false);
   };
 
-  /*const getPokemonData = async(url)=> {
-    const result = await axios.get(url);
-    return result.data;
-  }
-  const getPokemon = async(res) => {
+  //Nisam bila sigurna kako se tacno trebalo uraditi to za zahteve
+  //ovde je iskomentarisana metoda koja radi to, 5 zahteva u sekundi
+  //ali sam ostavila tu koja ne ukljucuje to
+  //Mozete je pokrenuti, radi valjda ono sto se trazilo
+  //takodje u komponenti detalji postoji jos jedan nacin
+  //samo nisam bila sigurna sta se tacno trazilo
+
+  /*const getPokemon = async (res) => {
     const newData = await Promise.all(
-        res.map(async(item) => {
-            const data = await getPokemonData(item.url);
-            return data
-        })
-    );
-    setPokeData((prevState) => {
-        const newState = [...prevState, ...newData];
-        newState.sort((a,b) => (a.id>b.id ? 1: -1));
-        return newState;
-    });
-    
-  }*/
+      res.map(async (item,index) => {
+        await new Promise((resolve)=> setTimeout(resolve, index*200))
+        const result = await axios.get(item.url);
+        return result.data;
+      })
+    );*/
+
   const getPokemon = async (res) => {
     const newData = await Promise.all(
       res.map(async (item) => {
@@ -64,18 +62,20 @@ function HomePage() {
   return (
     <>
       <Outlet />
+      {{ loading } === true && <h1>LOADING</h1>}
       <main>
         <ul className={classes.posts}>
           <PokemonApi pokemon={pokeData} loading={loading} />
         </ul>
       </main>
-      <div>
+      <div className={classes.divdiv}>
         {prevUrl && (
           <button
             onClick={() => {
               setPokeData([]);
               setUrl(prevUrl);
             }}
+            className={classes.button}
           >
             Previous
           </button>
@@ -86,6 +86,7 @@ function HomePage() {
               setPokeData([]);
               setUrl(nextUrl);
             }}
+            className={classes.button}
           >
             Next
           </button>
@@ -96,4 +97,3 @@ function HomePage() {
 }
 
 export default HomePage;
-

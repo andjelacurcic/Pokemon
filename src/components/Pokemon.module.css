@@ -6,7 +6,7 @@
     padding: 1rem 0;
     display: grid;
     gap: 1rem;
-    grid-template-columns: repeat(3, 30%);
+    grid-template-columns: repeat(4, 30%);
     justify-content: center;
   }
   .container{
@@ -15,15 +15,28 @@
     padding-top: 100px;
     display: flex;
 }
+.para{
+  font-size: 30;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.name{
+  font-size: 50;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  }
   .post {
     max-width: 20rem;
     margin: 1rem 0;
     padding: 1rem;
-    background-color: #9c7eee;
+    background-color: #dc830e9e;
     border-radius: 8px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.2);
     animation: animate-in 1s ease-out forwards;
+    text-align: center;
+    
+    
   }
+
+ 
   
   .author {
     font-size: 0.8rem;
@@ -37,8 +50,30 @@
     white-space: pre-wrap;
     font-size: 1.25rem;
     margin: 0.25rem 0 0 0;
-    color: #593884;
+    color: #ffffff;
     font-style: italic;
+  }
+
+  .button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    background-color: #93099b;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    align-items: center;
+    margin-right: 5px;
+  }
+  .divdiv{
+    display:flex;
+    justify-content: center;
+    margin-bottom: 20px;
   }
   
   @keyframes animate-in {

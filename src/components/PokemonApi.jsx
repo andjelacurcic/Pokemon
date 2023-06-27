@@ -67,14 +67,14 @@ function PokemonApi({ pokemon, loading }) {
             <>
               <div className={classes.post}>
                 <img src={item.sprites.front_default} alt="" />
-                <p>Name {item.name}</p>
+                <p className={classes.name}> {item.name}</p>
                 {species[index] !== null ? (
-                  <p>Species {species[index]}</p>
+                  <p>species {species[index]}</p>
                 ) : (
                   <p>-</p>
                 )}
                 {captureRates[index] !== null ? (
-                  <p>Capture rate {captureRates[index]}</p>
+                  <p>capture rate {captureRates[index]}</p>
                 ) : (
                   <p>-</p>
                 )}

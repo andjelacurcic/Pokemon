@@ -1,4 +1,3 @@
-import { Link, useLocation } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import Modal from "../components/Modal";
@@ -79,6 +78,7 @@ function PokemonDetails(props) {
       const pokemonExists = existingPokemons.some((p) => p.id === id);
       if (pokemonExists) {
         alert("Pokemon exists");
+        return;
       }
       const pokemon = {
         id: id,
@@ -92,7 +92,8 @@ function PokemonDetails(props) {
         "http://localhost:8082/pokemons",
         pokemon
       );
-      console.log(response.data);
+      alert("Pokemon added");
+      window.location.reload();
     } catch (error) {
       console.error("greska");
     }
@@ -108,36 +109,39 @@ function PokemonDetails(props) {
 
   return (
     <Modal>
-      <main className={classes.details}>
+      <main className={classes.post}>
         <h1></h1>
         <img src={pokemonData.sprites.front_default} alt="" />
-        <p>{pokemonData.name}</p>
-        <p>{pokemonData.species.name}</p>
-        <p>{rate}</p>
-        <p>{pokemonData.height}</p>
-        <p>{pokemonData.weight}</p>
+        <p className={classes.author}>{pokemonData.name}</p>
+        <div className={classes.text}>
+          <p>species: {pokemonData.species.name}</p>
+          <p>rate: {rate}</p>
+          <p>height: {pokemonData.height}</p>
+          <p>weight: {pokemonData.weight}</p>
+        </div>
         <h2>Abilities:</h2>
         <ul>
           {pokemonData.abilities.map((ability, index) => (
             <li key={ability.ability.name}>
-              {ability.ability.name}
+              {ability.ability.name + "->"}
               <button
                 onClick={() => getAbilityDescription(ability.ability.name)}
+                className={classes.button}
               >
-                Show description
+                Show description{" "}
               </button>
               <p>{description[ability.ability.name]}</p>
             </li>
           ))}
         </ul>
         <p>
-          <button onClick={() => postPokemon()}>add to catch list</button>
+          <button onClick={() => postPokemon()} className={classes.buttonCatch}>
+            add to catch list
+          </button>
         </p>
       </main>
     </Modal>
   );
-
 }
 
 export default PokemonDetails;
-

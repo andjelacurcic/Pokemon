@@ -3,10 +3,18 @@
     margin: 2rem 10%;
     padding: 1rem;
     text-align: center;
+    text-decoration: double;
     display: flex;
     justify-content: space-between;
     align-items: center;
     border-bottom: 2px solid #ece1fa;
+  }
+
+  .link{
+    text-decoration: none;
+    color: #000;
+    
+    
   }
   
   .logo {
@@ -14,7 +22,7 @@
     display: flex;
     gap: 1.5rem;
     align-items: center;
-    color: #ece1fa;
+    color: #e5881798;
   }
   
   .button {
@@ -33,5 +41,5 @@
   }
   
   .button:hover {
-    background-color: #8c6cf7;
+    background-color: #f0cc62;
   }

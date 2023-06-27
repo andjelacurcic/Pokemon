@@ -13,21 +13,17 @@ const router = createBrowserRouter([
     element: <RootLayout />,
     children: [
       {
-       path:"/",
-       element:<HomePage />,
-       children: [
-        { path: "/:id",element: <PokemonDetails />},
-  
-      ],
+        path: "/",
+        element: <HomePage />,
       },
       {
-        path:"/details/:id", element: <PokemonDetails location={location} />
+        path: "/details/:id",
+        element: <PokemonDetails location={location} />,
       },
-      { 
+      {
         path: "/posts",
         element: <Pokemons />,
         loader: postsLoader,
-        
       },
     ],
   },
