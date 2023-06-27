@@ -19,17 +19,8 @@ function HomePage() {
     getPokemon(res.data.results);
     setLoading(false);
   };
- /* const getPokemon = async (res) => {
-    res.map(async (item) => {
-      const result = await axios.get(item.url);
-      setPokeData((state) => {
-        state = [...state, result.data];
-        state.sort((a, b) => (a.id > b.id ? 1 : -1));
-        return state;
-      });
-    });
-  };*/
-  const getPokemonData = async(url)=> {
+
+  /*const getPokemonData = async(url)=> {
     const result = await axios.get(url);
     return result.data;
   }
@@ -44,8 +35,27 @@ function HomePage() {
         const newState = [...prevState, ...newData];
         newState.sort((a,b) => (a.id>b.id ? 1: -1));
         return newState;
-    })
-  }
+    });
+    
+  }*/
+  const getPokemon = async (res) => {
+    const newData = await Promise.all(
+      res.map(async (item) => {
+        const result = await axios.get(item.url);
+        return result.data;
+      })
+    );
+
+    setPokeData((prevState) => {
+      const uniqueData = newData.filter((item) => {
+        return !prevState.find((prevItem) => prevItem.id === item.id);
+      });
+
+      const newState = [...prevState, ...uniqueData];
+      newState.sort((a, b) => (a.id > b.id ? 1 : -1));
+      return newState;
+    });
+  };
 
   useEffect(() => {
     pokeFun();
@@ -56,27 +66,30 @@ function HomePage() {
       <Outlet />
       <main>
         <ul className={classes.posts}>
-        <PokemonApi pokemon={pokeData} loading={loading} />
+          <PokemonApi pokemon={pokeData} loading={loading} />
         </ul>
-        
       </main>
       <div>
-       {prevUrl && <button
-          onClick={() => {
-            setPokeData([]);
-            setUrl(prevUrl);
-          }}
-        >
-          Previous
-        </button>} 
-       {nextUrl && <button
-          onClick={() => {
-            setPokeData([]);
-            setUrl(nextUrl);
-          }}
-        >
-          Next
-        </button>}
+        {prevUrl && (
+          <button
+            onClick={() => {
+              setPokeData([]);
+              setUrl(prevUrl);
+            }}
+          >
+            Previous
+          </button>
+        )}
+        {nextUrl && (
+          <button
+            onClick={() => {
+              setPokeData([]);
+              setUrl(nextUrl);
+            }}
+          >
+            Next
+          </button>
+        )}
       </div>
     </>
   );
@@ -84,8 +97,3 @@ function HomePage() {
 
 export default HomePage;
 
-/*export async function loader() {
-    const response = await fetch("https://pokeapi.co/api/v2/pokemon");
-    const resData = await response.json();
-    return resData.results;
-  }*/

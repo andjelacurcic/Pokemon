@@ -8,7 +8,7 @@ function MainHeader({onCreatePost}) {
         <header className={classes.header}>
             <h1 className={classes.logo}>
                 
-                Pokomenss
+               <Link to='/'>POKEMONS</Link> 
             </h1>
             <p>
                 <Link to="/posts" className={classes.button}>
